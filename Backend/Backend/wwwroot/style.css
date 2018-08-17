@@ -1,0 +1,43 @@
+﻿    body {
+        padding-left: 1em;
+        padding-right: 1em;
+        max-width: 768px;
+    }
+
+    table {
+        text-align: center;
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 50px auto;
+    }
+
+    tr:nth-of-type(odd) {
+        background: #eee;
+    }
+
+    th {
+        background: #3498db;
+        color: white;
+        font-weight: bold;
+    }
+
+    td, th {
+        padding: 10px;
+        border: 1px solid #ccc;
+        text-align: left;
+        font-size: 18px;
+    }
+
+    /** Color business rules*/
+    .high-inventory { 
+        color: red;
+    }
+
+    .money::before {
+        content:"$";
+    }

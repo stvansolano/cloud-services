@@ -7,6 +7,8 @@
   <ItemGroup>
     <Folder Include="wwwroot\" />
     <Folder Include="Controllers\" />
+    <Folder Include="Models\" />
+    <Folder Include="Data\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,5 +22,21 @@
   <ItemGroup>
     <None Remove="UnitTests\bin\Debug\netcoreapp2.0\Backend.dll" />
     <None Remove="UnitTests\bin\Debug\netcoreapp2.0\Backend.pdb" />
+    <None Remove="Data\inventory.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\index.html" />
+    <Content Remove="wwwroot\app.js" />
+    <Content Remove="wwwroot\style.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\index.html" />
+    <None Include="wwwroot\app.js" />
+    <None Include="wwwroot\style.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\inventory.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 </Project>
