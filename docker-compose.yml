@@ -9,15 +9,7 @@ services:
       - 5000
     environment:
       - SERVICE_PORTS=5000
-    deploy:
-      replicas: 1
-      update_config:
-        parallelism: 1
-        delay: 10s
-      restart_policy:
-        condition: on-failure
-        max_attempts: 3
-        window: 120s
+    
   web_app: 
     build:
       context: frontend
@@ -27,12 +19,4 @@ services:
       - 5001
     environment:
       - SERVICE_PORTS=5001
-    deploy:
-      replicas: 1
-      update_config:
-        parallelism: 1
-        delay: 10s
-      restart_policy:
-        condition: on-failure
-        max_attempts: 3
-        window: 120s
+      
