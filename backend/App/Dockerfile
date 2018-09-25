@@ -1,11 +1,3 @@
-
-FROM microsoft/dotnet:runtime AS dotnet-runtime-aspnet
-RUN apt-get update && apt-get install -y gnupg apt-transport-https
-RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg && \
-    mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg && \
-    sh -c 'echo "deb https://packages.microsoft.com/repos/microsoft-debian-stretch-prod stretch main" > /etc/apt/sources.list.d/dotnetdev.list' && \
-    apt-get update && apt-get install -y dotnet-hosting-2.0.6
-
 FROM microsoft/dotnet:sdk AS build
 
 # copy csproj and restore as distinct layers
