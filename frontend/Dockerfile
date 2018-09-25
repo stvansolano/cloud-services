@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:sdk AS build
+ FROM microsoft/aspnetcore-build AS build
 
 # copy csproj and restore as distinct layers
 COPY ./* ./app/

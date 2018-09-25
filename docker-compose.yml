@@ -16,7 +16,7 @@ services:
       dockerfile: Dockerfile  
     image: web_app
     ports:
-      - 8020:5001
+      - 8080:5001
     environment:
       - SERVICE_PORTS=5001
 
