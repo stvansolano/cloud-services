@@ -5,8 +5,6 @@ services:
       context: backend/App
       dockerfile: Dockerfile  
     image: web_api
-    ports:
-      - 8021:5000
     environment:
       - SERVICE_PORTS=5000
           
@@ -15,8 +13,6 @@ services:
       context: frontend
       dockerfile: Dockerfile  
     image: web_app
-    ports:
-      - 8080:5001
     environment:
       - SERVICE_PORTS=5001
 
