@@ -1,0 +1,693 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "webhooks_myclouddocker_serviceUri": {
+            "defaultValue": null,
+            "type": "SecureString"
+        },
+        "sites_cloud_services_name": {
+            "defaultValue": "cloud-services",
+            "type": "String"
+        },
+        "sites_my_cloud_docker_name": {
+            "defaultValue": "my-cloud-docker",
+            "type": "String"
+        },
+        "components_cloud_services_name": {
+            "defaultValue": "cloud-services",
+            "type": "String"
+        },
+        "config_web_name": {
+            "defaultValue": "web",
+            "type": "String"
+        },
+        "config_web_name_1": {
+            "defaultValue": "web",
+            "type": "String"
+        },
+        "storageAccounts_cloudserverlessstorage_name": {
+            "defaultValue": "cloudserverlessstorage",
+            "type": "String"
+        },
+        "registries_dockerimagecontainer_name": {
+            "defaultValue": "dockerimagecontainer",
+            "type": "String"
+        },
+        "deployments_91534921483910_name": {
+            "defaultValue": "91534921483910",
+            "type": "String"
+        },
+        "deployments_81534920429914_name": {
+            "defaultValue": "81534920429914",
+            "type": "String"
+        },
+        "deployments_71534919818469_name": {
+            "defaultValue": "71534919818469",
+            "type": "String"
+        },
+        "deployments_61534919210717_name": {
+            "defaultValue": "61534919210717",
+            "type": "String"
+        },
+        "deployments_51534918744201_name": {
+            "defaultValue": "51534918744201",
+            "type": "String"
+        },
+        "deployments_41534917705721_name": {
+            "defaultValue": "41534917705721",
+            "type": "String"
+        },
+        "deployments_21534915957476_name": {
+            "defaultValue": "21534915957476",
+            "type": "String"
+        },
+        "webhooks_myclouddocker_name": {
+            "defaultValue": "myclouddocker",
+            "type": "String"
+        },
+        "hostNameBindings_cloud_services.azurewebsites.net_name": {
+            "defaultValue": "cloud-services.azurewebsites.net",
+            "type": "String"
+        },
+        "hostNameBindings_my_cloud_docker.azurewebsites.net_name": {
+            "defaultValue": "my-cloud-docker.azurewebsites.net",
+            "type": "String"
+        },
+        "sites_my_cloud_docker_serverFarmId": {
+            "defaultValue": "/subscriptions/befb29ee-67e7-4051-91d1-9d487ce235c0/resourceGroups/appsvc_rg_linux_centralus/providers/Microsoft.Web/serverfarms/appsvc_asp_linux_centralus",
+            "type": "String"
+        },
+        "sites_cloud_services_serverFarmId": {
+            "defaultValue": "/subscriptions/befb29ee-67e7-4051-91d1-9d487ce235c0/resourceGroups/MyResourceGroup/providers/Microsoft.Web/serverfarms/ServicePlanbcd1fc90-aaf1",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "comments": "Generalized from resource: '/subscriptions/befb29ee-67e7-4051-91d1-9d487ce235c0/resourceGroups/cloud-services/providers/Microsoft.ContainerRegistry/registries/dockerimagecontainer'.",
+            "type": "Microsoft.ContainerRegistry/registries",
+            "sku": {
+                "name": "Basic",
+                "tier": "Basic"
+            },
+            "name": "[parameters('registries_dockerimagecontainer_name')]",
+            "apiVersion": "2017-10-01",
+            "location": "southcentralus",
+            "tags": {},
+            "scale": null,
+            "properties": {
+                "adminUserEnabled": true
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/befb29ee-67e7-4051-91d1-9d487ce235c0/resourceGroups/cloud-services/providers/microsoft.insights/components/cloud-services'.",
+            "type": "microsoft.insights/components",
+            "kind": "web",
+            "name": "[parameters('components_cloud_services_name')]",
+            "apiVersion": "2015-05-01",
+            "location": "southcentralus",
+            "tags": {
+                "hidden-link:/subscriptions/befb29ee-67e7-4051-91d1-9d487ce235c0/resourceGroups/cloud-services/providers/Microsoft.Web/sites/cloud-services": "Resource"
+            },
+            "scale": null,
+            "properties": {
+                "Application_Type": "web",
+                "Flow_Type": null,
+                "Request_Source": "IbizaWebAppExtensionCreate",
+                "HockeyAppId": null,
+                "SamplingPercentage": null
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/befb29ee-67e7-4051-91d1-9d487ce235c0/resourceGroups/cloud-services/providers/Microsoft.Storage/storageAccounts/cloudserverlessstorage'.",
+            "type": "Microsoft.Storage/storageAccounts",
+            "sku": {
+                "name": "Standard_LRS",
+                "tier": "Standard"
+            },
+            "kind": "Storage",
+            "name": "[parameters('storageAccounts_cloudserverlessstorage_name')]",
+            "apiVersion": "2018-07-01",
+            "location": "centralus",
+            "tags": {},
+            "scale": null,
+            "properties": {
+                "networkAcls": {
+                    "bypass": "AzureServices",
+                    "virtualNetworkRules": [],
+                    "ipRules": [],
+                    "defaultAction": "Allow"
+                },
+                "supportsHttpsTrafficOnly": false,
+                "encryption": {
+                    "services": {
+                        "file": {
+                            "enabled": true
+                        },
+                        "blob": {
+                            "enabled": true
+                        }
+                    },
+                    "keySource": "Microsoft.Storage"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/befb29ee-67e7-4051-91d1-9d487ce235c0/resourceGroups/cloud-services/providers/Microsoft.Web/sites/my-cloud-docker'.",
+            "type": "Microsoft.Web/sites",
+            "kind": "app,linux,container",
+            "name": "[parameters('sites_my_cloud_docker_name')]",
+            "apiVersion": "2016-08-01",
+            "location": "Central US",
+            "scale": null,
+            "properties": {
+                "enabled": true,
+                "hostNameSslStates": [
+                    {
+                        "name": "[concat(parameters('sites_my_cloud_docker_name'),'.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "virtualIP": null,
+                        "thumbprint": null,
+                        "toUpdate": null,
+                        "hostType": "Standard"
+                    },
+                    {
+                        "name": "[concat(parameters('sites_my_cloud_docker_name'),'.scm.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "virtualIP": null,
+                        "thumbprint": null,
+                        "toUpdate": null,
+                        "hostType": "Repository"
+                    }
+                ],
+                "serverFarmId": "[parameters('sites_my_cloud_docker_serverFarmId')]",
+                "reserved": true,
+                "siteConfig": null,
+                "scmSiteAlsoStopped": false,
+                "hostingEnvironmentProfile": null,
+                "clientAffinityEnabled": true,
+                "clientCertEnabled": false,
+                "hostNamesDisabled": false,
+                "containerSize": 0,
+                "dailyMemoryTimeQuota": 0,
+                "cloningInfo": null,
+                "httpsOnly": false
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/befb29ee-67e7-4051-91d1-9d487ce235c0/resourceGroups/cloud-services/providers/Microsoft.Web/sites/cloud-services'.",
+            "type": "Microsoft.Web/sites",
+            "kind": "app",
+            "name": "[parameters('sites_cloud_services_name')]",
+            "apiVersion": "2016-08-01",
+            "location": "South Central US",
+            "scale": null,
+            "properties": {
+                "enabled": true,
+                "hostNameSslStates": [
+                    {
+                        "name": "[concat(parameters('sites_cloud_services_name'),'.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "virtualIP": null,
+                        "thumbprint": null,
+                        "toUpdate": null,
+                        "hostType": "Standard"
+                    },
+                    {
+                        "name": "[concat(parameters('sites_cloud_services_name'),'.scm.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "virtualIP": null,
+                        "thumbprint": null,
+                        "toUpdate": null,
+                        "hostType": "Repository"
+                    }
+                ],
+                "serverFarmId": "[parameters('sites_cloud_services_serverFarmId')]",
+                "reserved": false,
+                "siteConfig": null,
+                "scmSiteAlsoStopped": false,
+                "hostingEnvironmentProfile": null,
+                "clientAffinityEnabled": true,
+                "clientCertEnabled": false,
+                "hostNamesDisabled": false,
+                "containerSize": 0,
+                "dailyMemoryTimeQuota": 0,
+                "cloningInfo": null,
+                "httpsOnly": false
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/befb29ee-67e7-4051-91d1-9d487ce235c0/resourceGroups/cloud-services/providers/Microsoft.ContainerRegistry/registries/dockerimagecontainer/webhooks/myclouddocker'.",
+            "type": "Microsoft.ContainerRegistry/registries/webhooks",
+            "name": "[concat(parameters('registries_dockerimagecontainer_name'), '/', parameters('webhooks_myclouddocker_name'))]",
+            "apiVersion": "2017-10-01",
+            "location": "southcentralus",
+            "tags": {},
+            "scale": null,
+            "properties": {
+                "status": "enabled",
+                "scope": "web_app:latest",
+                "actions": [
+                    "push"
+                ],
+                "serviceUri": "[parameters('webhooks_myclouddocker_serviceUri')]"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.ContainerRegistry/registries', parameters('registries_dockerimagecontainer_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/befb29ee-67e7-4051-91d1-9d487ce235c0/resourceGroups/cloud-services/providers/Microsoft.Web/sites/my-cloud-docker/config/web'.",
+            "type": "Microsoft.Web/sites/config",
+            "name": "[concat(parameters('sites_my_cloud_docker_name'), '/', parameters('config_web_name_1'))]",
+            "apiVersion": "2016-08-01",
+            "location": "Central US",
+            "scale": null,
+            "properties": {
+                "numberOfWorkers": 1,
+                "defaultDocuments": [
+                    "Default.htm",
+                    "Default.html",
+                    "Default.asp",
+                    "index.htm",
+                    "index.html",
+                    "iisstart.htm",
+                    "default.aspx",
+                    "index.php",
+                    "hostingstart.html"
+                ],
+                "netFrameworkVersion": "v4.0",
+                "phpVersion": "",
+                "pythonVersion": "",
+                "nodeVersion": "",
+                "linuxFxVersion": "[concat('DOCKER|dockerimagecontainer.azurecr.io/', parameters('config_web_name_1'),'_app:latest')]",
+                "windowsFxVersion": null,
+                "requestTracingEnabled": false,
+                "remoteDebuggingEnabled": false,
+                "remoteDebuggingVersion": null,
+                "httpLoggingEnabled": false,
+                "logsDirectorySizeLimit": 35,
+                "detailedErrorLoggingEnabled": false,
+                "publishingUsername": "$my-cloud-docker",
+                "publishingPassword": null,
+                "appSettings": null,
+                "azureStorageAccounts": {},
+                "metadata": null,
+                "connectionStrings": null,
+                "machineKey": null,
+                "handlerMappings": null,
+                "documentRoot": null,
+                "scmType": "None",
+                "use32BitWorkerProcess": true,
+                "webSocketsEnabled": false,
+                "alwaysOn": false,
+                "javaVersion": null,
+                "javaContainer": null,
+                "javaContainerVersion": null,
+                "appCommandLine": "",
+                "managedPipelineMode": "Integrated",
+                "virtualApplications": [
+                    {
+                        "virtualPath": "/",
+                        "physicalPath": "site\\wwwroot",
+                        "preloadEnabled": false,
+                        "virtualDirectories": null
+                    }
+                ],
+                "winAuthAdminState": 0,
+                "winAuthTenantState": 0,
+                "customAppPoolIdentityAdminState": false,
+                "customAppPoolIdentityTenantState": false,
+                "runtimeADUser": null,
+                "runtimeADUserPassword": null,
+                "loadBalancing": "LeastRequests",
+                "routingRules": [],
+                "experiments": {
+                    "rampUpRules": []
+                },
+                "limits": null,
+                "autoHealEnabled": false,
+                "autoHealRules": null,
+                "tracingOptions": null,
+                "vnetName": "",
+                "siteAuthEnabled": false,
+                "siteAuthSettings": {
+                    "enabled": null,
+                    "unauthenticatedClientAction": null,
+                    "tokenStoreEnabled": null,
+                    "allowedExternalRedirectUrls": null,
+                    "defaultProvider": null,
+                    "clientId": null,
+                    "clientSecret": null,
+                    "clientSecretCertificateThumbprint": null,
+                    "issuer": null,
+                    "allowedAudiences": null,
+                    "additionalLoginParams": null,
+                    "isAadAutoProvisioned": false,
+                    "googleClientId": null,
+                    "googleClientSecret": null,
+                    "googleOAuthScopes": null,
+                    "facebookAppId": null,
+                    "facebookAppSecret": null,
+                    "facebookOAuthScopes": null,
+                    "twitterConsumerKey": null,
+                    "twitterConsumerSecret": null,
+                    "microsoftAccountClientId": null,
+                    "microsoftAccountClientSecret": null,
+                    "microsoftAccountOAuthScopes": null
+                },
+                "cors": null,
+                "push": null,
+                "apiDefinition": null,
+                "autoSwapSlotName": null,
+                "localMySqlEnabled": false,
+                "managedServiceIdentityId": null,
+                "xManagedServiceIdentityId": null,
+                "ipSecurityRestrictions": null,
+                "http20Enabled": false,
+                "minTlsVersion": "1.2",
+                "ftpsState": "AllAllowed",
+                "reservedInstanceCount": 0
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_my_cloud_docker_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/befb29ee-67e7-4051-91d1-9d487ce235c0/resourceGroups/cloud-services/providers/Microsoft.Web/sites/my-cloud-docker/hostNameBindings/my-cloud-docker.azurewebsites.net'.",
+            "type": "Microsoft.Web/sites/hostNameBindings",
+            "name": "[concat(parameters('sites_my_cloud_docker_name'), '/', parameters('hostNameBindings_my_cloud_docker.azurewebsites.net_name'))]",
+            "apiVersion": "2016-08-01",
+            "location": "Central US",
+            "scale": null,
+            "properties": {
+                "siteName": "my-cloud-docker",
+                "domainId": null,
+                "hostNameType": "Verified"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_my_cloud_docker_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/befb29ee-67e7-4051-91d1-9d487ce235c0/resourceGroups/cloud-services/providers/Microsoft.Web/sites/cloud-services/config/web'.",
+            "type": "Microsoft.Web/sites/config",
+            "name": "[concat(parameters('sites_cloud_services_name'), '/', parameters('config_web_name'))]",
+            "apiVersion": "2016-08-01",
+            "location": "South Central US",
+            "scale": null,
+            "properties": {
+                "numberOfWorkers": 1,
+                "defaultDocuments": [
+                    "Default.htm",
+                    "Default.html",
+                    "Default.asp",
+                    "index.htm",
+                    "index.html",
+                    "iisstart.htm",
+                    "default.aspx",
+                    "index.php",
+                    "hostingstart.html"
+                ],
+                "netFrameworkVersion": "v4.0",
+                "phpVersion": "5.6",
+                "pythonVersion": "",
+                "nodeVersion": "",
+                "linuxFxVersion": "",
+                "windowsFxVersion": null,
+                "requestTracingEnabled": false,
+                "remoteDebuggingEnabled": false,
+                "remoteDebuggingVersion": null,
+                "httpLoggingEnabled": false,
+                "logsDirectorySizeLimit": 35,
+                "detailedErrorLoggingEnabled": false,
+                "publishingUsername": "$cloud-services",
+                "publishingPassword": null,
+                "appSettings": null,
+                "azureStorageAccounts": {},
+                "metadata": null,
+                "connectionStrings": null,
+                "machineKey": null,
+                "handlerMappings": null,
+                "documentRoot": null,
+                "scmType": "VSTSRM",
+                "use32BitWorkerProcess": true,
+                "webSocketsEnabled": false,
+                "alwaysOn": false,
+                "javaVersion": null,
+                "javaContainer": null,
+                "javaContainerVersion": null,
+                "appCommandLine": "",
+                "managedPipelineMode": "Integrated",
+                "virtualApplications": [
+                    {
+                        "virtualPath": "/",
+                        "physicalPath": "site\\wwwroot",
+                        "preloadEnabled": false,
+                        "virtualDirectories": null
+                    },
+                    {
+                        "virtualPath": "/cloud-services",
+                        "physicalPath": "site\\cloud-services\\wwwroot",
+                        "preloadEnabled": false,
+                        "virtualDirectories": null
+                    }
+                ],
+                "winAuthAdminState": 0,
+                "winAuthTenantState": 0,
+                "customAppPoolIdentityAdminState": false,
+                "customAppPoolIdentityTenantState": false,
+                "runtimeADUser": null,
+                "runtimeADUserPassword": null,
+                "loadBalancing": "LeastRequests",
+                "routingRules": [],
+                "experiments": {
+                    "rampUpRules": []
+                },
+                "limits": null,
+                "autoHealEnabled": false,
+                "autoHealRules": null,
+                "tracingOptions": null,
+                "vnetName": "",
+                "siteAuthEnabled": false,
+                "siteAuthSettings": {
+                    "enabled": null,
+                    "unauthenticatedClientAction": null,
+                    "tokenStoreEnabled": null,
+                    "allowedExternalRedirectUrls": null,
+                    "defaultProvider": null,
+                    "clientId": null,
+                    "clientSecret": null,
+                    "clientSecretCertificateThumbprint": null,
+                    "issuer": null,
+                    "allowedAudiences": null,
+                    "additionalLoginParams": null,
+                    "isAadAutoProvisioned": false,
+                    "googleClientId": null,
+                    "googleClientSecret": null,
+                    "googleOAuthScopes": null,
+                    "facebookAppId": null,
+                    "facebookAppSecret": null,
+                    "facebookOAuthScopes": null,
+                    "twitterConsumerKey": null,
+                    "twitterConsumerSecret": null,
+                    "microsoftAccountClientId": null,
+                    "microsoftAccountClientSecret": null,
+                    "microsoftAccountOAuthScopes": null
+                },
+                "cors": null,
+                "push": null,
+                "apiDefinition": null,
+                "autoSwapSlotName": null,
+                "localMySqlEnabled": false,
+                "managedServiceIdentityId": null,
+                "xManagedServiceIdentityId": null,
+                "ipSecurityRestrictions": null,
+                "http20Enabled": false,
+                "minTlsVersion": "1.2",
+                "ftpsState": "AllAllowed",
+                "reservedInstanceCount": 0
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_cloud_services_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/befb29ee-67e7-4051-91d1-9d487ce235c0/resourcegroups/cloud-services/providers/Microsoft.Web/sites/cloud-services/deployments/91534921483910'.",
+            "type": "Microsoft.Web/sites/deployments",
+            "name": "[concat(parameters('sites_cloud_services_name'), '/', parameters('deployments_91534921483910_name'))]",
+            "apiVersion": "2016-08-01",
+            "location": "South Central US",
+            "scale": null,
+            "properties": {
+                "id": "[parameters('deployments_91534921483910_name')]",
+                "status": 4,
+                "author_email": "",
+                "author": "stvansolano",
+                "deployer": "VSTS",
+                "message": "{\"type\":\"Deployment\",\"commitId\":\"2a4105c261f3b37cea7ade54cb00ba5a7d3cbcf7\",\"buildId\":\"19\",\"releaseId\":\"9\",\"buildNumber\":\"20180822.7\",\"releaseName\":\"Release-9\",\"repoProvider\":\"GitHub\",\"collectionUrl\":\"https://stvansolano.visualstudio.com/\",\"teamProject\":\"90054dad-1f80-453b-bebb-55a17a7bc9d6\",\"slotName\":\"production\"}",
+                "start_time": "2018-08-22T07:04:44.5189205Z",
+                "end_time": "2018-08-22T07:04:44.5189205Z",
+                "active": true
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_cloud_services_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/befb29ee-67e7-4051-91d1-9d487ce235c0/resourcegroups/cloud-services/providers/Microsoft.Web/sites/cloud-services/deployments/81534920429914'.",
+            "type": "Microsoft.Web/sites/deployments",
+            "name": "[concat(parameters('sites_cloud_services_name'), '/', parameters('deployments_81534920429914_name'))]",
+            "apiVersion": "2016-08-01",
+            "location": "South Central US",
+            "scale": null,
+            "properties": {
+                "id": "[parameters('deployments_81534920429914_name')]",
+                "status": 4,
+                "author_email": "",
+                "author": "stvansolano",
+                "deployer": "VSTS",
+                "message": "{\"type\":\"Deployment\",\"commitId\":\"9b288463671ae54591a2db27c75316557c015539\",\"buildId\":\"18\",\"releaseId\":\"8\",\"buildNumber\":\"20180822.6\",\"releaseName\":\"Release-8\",\"repoProvider\":\"GitHub\",\"collectionUrl\":\"https://stvansolano.visualstudio.com/\",\"teamProject\":\"90054dad-1f80-453b-bebb-55a17a7bc9d6\",\"slotName\":\"production\"}",
+                "start_time": "2018-08-22T06:47:10.5194845Z",
+                "end_time": "2018-08-22T06:47:10.5194845Z",
+                "active": false
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_cloud_services_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/befb29ee-67e7-4051-91d1-9d487ce235c0/resourcegroups/cloud-services/providers/Microsoft.Web/sites/cloud-services/deployments/71534919818469'.",
+            "type": "Microsoft.Web/sites/deployments",
+            "name": "[concat(parameters('sites_cloud_services_name'), '/', parameters('deployments_71534919818469_name'))]",
+            "apiVersion": "2016-08-01",
+            "location": "South Central US",
+            "scale": null,
+            "properties": {
+                "id": "[parameters('deployments_71534919818469_name')]",
+                "status": 4,
+                "author_email": "",
+                "author": "stvansolano",
+                "deployer": "VSTS",
+                "message": "{\"type\":\"Deployment\",\"commitId\":\"e1b2dce713e359d67836dc874d479942ed94d457\",\"buildId\":\"17\",\"releaseId\":\"7\",\"buildNumber\":\"20180822.5\",\"releaseName\":\"Release-7\",\"repoProvider\":\"GitHub\",\"collectionUrl\":\"https://stvansolano.visualstudio.com/\",\"teamProject\":\"90054dad-1f80-453b-bebb-55a17a7bc9d6\",\"slotName\":\"production\"}",
+                "start_time": "2018-08-22T06:36:59.0584938Z",
+                "end_time": "2018-08-22T06:36:59.0584938Z",
+                "active": false
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_cloud_services_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/befb29ee-67e7-4051-91d1-9d487ce235c0/resourcegroups/cloud-services/providers/Microsoft.Web/sites/cloud-services/deployments/61534919210717'.",
+            "type": "Microsoft.Web/sites/deployments",
+            "name": "[concat(parameters('sites_cloud_services_name'), '/', parameters('deployments_61534919210717_name'))]",
+            "apiVersion": "2016-08-01",
+            "location": "South Central US",
+            "scale": null,
+            "properties": {
+                "id": "[parameters('deployments_61534919210717_name')]",
+                "status": 4,
+                "author_email": "",
+                "author": "stvansolano",
+                "deployer": "VSTS",
+                "message": "{\"type\":\"Deployment\",\"commitId\":\"f65984b938ea4b763d8ea85fccb1b82835b63bdd\",\"buildId\":\"16\",\"releaseId\":\"6\",\"buildNumber\":\"20180822.4\",\"releaseName\":\"Release-6\",\"repoProvider\":\"GitHub\",\"collectionUrl\":\"https://stvansolano.visualstudio.com/\",\"teamProject\":\"90054dad-1f80-453b-bebb-55a17a7bc9d6\",\"slotName\":\"production\"}",
+                "start_time": "2018-08-22T06:26:50.9749651Z",
+                "end_time": "2018-08-22T06:26:50.9749651Z",
+                "active": false
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_cloud_services_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/befb29ee-67e7-4051-91d1-9d487ce235c0/resourcegroups/cloud-services/providers/Microsoft.Web/sites/cloud-services/deployments/51534918744201'.",
+            "type": "Microsoft.Web/sites/deployments",
+            "name": "[concat(parameters('sites_cloud_services_name'), '/', parameters('deployments_51534918744201_name'))]",
+            "apiVersion": "2016-08-01",
+            "location": "South Central US",
+            "scale": null,
+            "properties": {
+                "id": "[parameters('deployments_51534918744201_name')]",
+                "status": 4,
+                "author_email": "",
+                "author": "stvansolano",
+                "deployer": "VSTS",
+                "message": "{\"type\":\"Deployment\",\"commitId\":\"a09fdf22c282a707075c8dac25f2f09ce2de803e\",\"buildId\":\"15\",\"releaseId\":\"5\",\"buildNumber\":\"20180822.3\",\"releaseName\":\"Release-5\",\"repoProvider\":\"GitHub\",\"collectionUrl\":\"https://stvansolano.visualstudio.com/\",\"teamProject\":\"90054dad-1f80-453b-bebb-55a17a7bc9d6\",\"slotName\":\"production\"}",
+                "start_time": "2018-08-22T06:19:04.8541209Z",
+                "end_time": "2018-08-22T06:19:04.8541209Z",
+                "active": false
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_cloud_services_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/befb29ee-67e7-4051-91d1-9d487ce235c0/resourcegroups/cloud-services/providers/Microsoft.Web/sites/cloud-services/deployments/41534917705721'.",
+            "type": "Microsoft.Web/sites/deployments",
+            "name": "[concat(parameters('sites_cloud_services_name'), '/', parameters('deployments_41534917705721_name'))]",
+            "apiVersion": "2016-08-01",
+            "location": "South Central US",
+            "scale": null,
+            "properties": {
+                "id": "[parameters('deployments_41534917705721_name')]",
+                "status": 4,
+                "author_email": "",
+                "author": "stvansolano",
+                "deployer": "VSTS",
+                "message": "{\"type\":\"Deployment\",\"commitId\":\"504f021f4e1e50df1cfdf4afdad7348c914e60a7\",\"buildId\":\"14\",\"releaseId\":\"4\",\"buildNumber\":\"20180822.2\",\"releaseName\":\"Release-4\",\"repoProvider\":\"GitHub\",\"collectionUrl\":\"https://stvansolano.visualstudio.com/\",\"teamProject\":\"90054dad-1f80-453b-bebb-55a17a7bc9d6\",\"slotName\":\"production\"}",
+                "start_time": "2018-08-22T06:01:46.3110986Z",
+                "end_time": "2018-08-22T06:01:46.3110986Z",
+                "active": false
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_cloud_services_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/befb29ee-67e7-4051-91d1-9d487ce235c0/resourcegroups/cloud-services/providers/Microsoft.Web/sites/cloud-services/deployments/21534915957476'.",
+            "type": "Microsoft.Web/sites/deployments",
+            "name": "[concat(parameters('sites_cloud_services_name'), '/', parameters('deployments_21534915957476_name'))]",
+            "apiVersion": "2016-08-01",
+            "location": "South Central US",
+            "scale": null,
+            "properties": {
+                "id": "[parameters('deployments_21534915957476_name')]",
+                "status": 4,
+                "author_email": "",
+                "author": "stvansolano",
+                "deployer": "VSTS",
+                "message": "{\"type\":\"Deployment\",\"commitId\":\"60c7e361b455d787ec8250ae6041983bfec73c38\",\"buildId\":\"13\",\"releaseId\":\"2\",\"buildNumber\":\"20180822.1\",\"releaseName\":\"Release-2\",\"repoProvider\":\"GitHub\",\"collectionUrl\":\"https://stvansolano.visualstudio.com/\",\"teamProject\":\"90054dad-1f80-453b-bebb-55a17a7bc9d6\",\"slotName\":\"production\"}",
+                "start_time": "2018-08-22T05:32:38.6282095Z",
+                "end_time": "2018-08-22T05:32:38.6282095Z",
+                "active": false
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_cloud_services_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/befb29ee-67e7-4051-91d1-9d487ce235c0/resourceGroups/cloud-services/providers/Microsoft.Web/sites/cloud-services/hostNameBindings/cloud-services.azurewebsites.net'.",
+            "type": "Microsoft.Web/sites/hostNameBindings",
+            "name": "[concat(parameters('sites_cloud_services_name'), '/', parameters('hostNameBindings_cloud_services.azurewebsites.net_name'))]",
+            "apiVersion": "2016-08-01",
+            "location": "South Central US",
+            "scale": null,
+            "properties": {
+                "siteName": "cloud-services",
+                "domainId": null,
+                "hostNameType": "Verified"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_cloud_services_name'))]"
+            ]
+        }
+    ]
+}
