@@ -24,6 +24,14 @@ namespace App
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
+			services.AddCors(options =>
+            {
+                options.AddPolicy("ALLOW_ANY_ORIGIN",
+                    builder => builder.AllowAnyOrigin()
+                                .AllowAnyMethod()
+                                .AllowAnyHeader()
+                                .Build());
+            });
 			services.AddMvc(options => {
 				options.OutputFormatters.Add(
 					new JsonOutputFormatter(new Newtonsoft.Json.JsonSerializerSettings
@@ -42,6 +50,7 @@ namespace App
 			{
 				app.UseDeveloperExceptionPage();
 			}
+			app.UseCors("ALLOW_ANY_ORIGIN");
 
 			app.UseMvc(routes => 
                 routes.MapRoute(
